@@ -1,6 +1,3 @@
-# super-market-app
-
-
 # Supermarket Management System
 
 ## 🛒 Overview
@@ -48,7 +45,7 @@ The **Supermarket Management System** is a **multi-tenant** web application desi
 ## 🔧 Installation & Setup
 ### **1. Clone the repository**
 ```sh
-git clone https://github.com/your-repo/supermarket-management.git
+git clone https://github.com/yasirudeshan/super-market-app
 cd supermarket-management
 ```
 
@@ -66,11 +63,6 @@ npm install
 npm start
 ```
 
-### **4. Run Keycloak for Authentication**
-```sh
-docker-compose up -d keycloak
-```
-
 ---
 
 ## 📌 Roadmap
@@ -83,15 +75,9 @@ docker-compose up -d keycloak
 ## 🤝 Contributing
 Contributions are welcome! Feel free to submit a Pull Request.
 
----
-
-## 📜 License
-This project is licensed under the **MIT License**.
-
----
 
 ## 📩 Contact
-For any queries, reach out to **your-email@example.com** or open an issue on GitHub!
+For any queries, reach out to **rpyasiru@gmail.com** or open an issue on GitHub!
 
 🚀 Happy Coding!
 
