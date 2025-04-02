@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
+
+    <!-- Create roles table -->
+    <changeSet id="20250402-1" author="Yasiru-Karunarathne">
+        <createTable tableName="roles">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_name" type="varchar(100)">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)"/>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP"/>
+        </createTable>
+    </changeSet>
+
+    <!-- Create role_permissions table -->
+    <changeSet id="20250402-2" author="Yasiru-Karunarathne">
+        <createTable tableName="role_permissions">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_role_permissions_role" references="roles(id)"/>
+            </column>
+            <column name="permission" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Create users_roles table (Many-to-Many) -->
+    <changeSet id="20250402-3" author="Yasiru-Karunarathne">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="bigint">
+                <constraints nullable="false" foreignKeyName="fk_users_roles_role" references="roles(id)"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- Add primary key for users_roles (Many-to-Many) -->
+    <changeSet id="20250402-4" author="yourname">
+        <addPrimaryKey columnNames="user_id, role_id" tableName="users_roles" constraintName="pk_users_roles"/>
+    </changeSet>
+
+    <!-- Insert default roles -->
+    <changeSet id="20250402-5" author="Yasiru-Karunarathne">
+        <insert tableName="roles">
+            <column name="role_name" value="ADMIN"/>
+            <column name="description" value="Manages all tenants"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_name" value="TENANT_ADMIN"/>
+            <column name="description" value="Manages own tenant"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_name" value="CASHIER"/>
+            <column name="description" value="Handles billing"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="role_name" value="MANAGER"/>
+            <column name="description" value="Manages store stock"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
