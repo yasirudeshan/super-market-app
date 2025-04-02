@@ -15,4 +15,6 @@
         </createTable>
     </changeSet>
 
+    <include file="db/changelog/20250402_create_roles.xml"/>
+
 </databaseChangeLog>
