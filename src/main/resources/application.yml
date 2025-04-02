@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: supermarketweb
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/user-management
+    username: postgres
+    password: PASSWORD
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update  # Options: "validate", "create", "update", "none"
+    show-sql: true
